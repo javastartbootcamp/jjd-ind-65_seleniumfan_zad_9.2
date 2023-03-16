@@ -2,6 +2,7 @@ package pl.javastart.task;
 
 public class Car extends Vehicle {
     boolean isAcOn;
+    private static final double EXTRA_CONSUMPTION_FOR_AC_ON = 0.8;
 
     public Car(String name, double tankCapacity, double averagePetrolConsumption, boolean isAcOn) {
         super(name, tankCapacity, averagePetrolConsumption);
@@ -17,11 +18,6 @@ public class Car extends Vehicle {
     }
 
     @Override
-    public double range() {
-        return (getTankCapacity() * 100) / computeAveragePetrolConsumption();
-    }
-
-    @Override
     public void printInfo() {
         super.printInfo();
         System.out.print(", klimatyzacja włączona? " + (isAcOn ? "tak" : "nie"));
@@ -29,6 +25,6 @@ public class Car extends Vehicle {
 
     @Override
     public double computeAveragePetrolConsumption() {
-        return isAcOn ? getAveragePetrolConsumption() + 0.8 : getAveragePetrolConsumption();
+        return isAcOn ? getAveragePetrolConsumption() + EXTRA_CONSUMPTION_FOR_AC_ON : getAveragePetrolConsumption();
     }
 }

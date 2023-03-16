@@ -4,6 +4,7 @@ public class Vehicle {
     private String name;
     private double tankCapacity;
     private double averagePetrolConsumption;
+    private static final int HUNDRED_KILOMETERS = 100;
 
     public Vehicle(String name, double tankCapacity, double averagePetrolConsumption) {
         this.name = name;
@@ -12,7 +13,7 @@ public class Vehicle {
     }
 
     public double range() {
-        return (tankCapacity * 100) / averagePetrolConsumption;
+        return (tankCapacity * HUNDRED_KILOMETERS) / computeAveragePetrolConsumption();
     }
 
     public String getName() {

@@ -2,6 +2,8 @@ package pl.javastart.task;
 
 public class Truck extends Car {
     private int weight;
+    private static final double EXTRA_CONSUMPTION_PER_WEIGHT = 0.005;
+    private static final double EXTRA_CONSUMPTION_FOR_AC_ON = 1.6;
 
     public Truck(String name, double tankCapacity, double averagePetrolConsumption, boolean isAcOn, int weight) {
         super(name, tankCapacity, averagePetrolConsumption, isAcOn);
@@ -17,11 +19,6 @@ public class Truck extends Car {
     }
 
     @Override
-    public double range() {
-        return (getTankCapacity() * 100) / computeAveragePetrolConsumption();
-    }
-
-    @Override
     public void printInfo() {
         super.printInfo();
         System.out.print(", waga: " + weight);
@@ -29,6 +26,8 @@ public class Truck extends Car {
 
     @Override
     public double computeAveragePetrolConsumption() {
-        return isAcOn ? getAveragePetrolConsumption() + 1.6 + 0.005 * weight : getAveragePetrolConsumption() + 0.005 * weight;
+        double avgPetrolConsumptionPerTruck = getAveragePetrolConsumption() + EXTRA_CONSUMPTION_PER_WEIGHT * weight;
+        double avgPetrolConsumptionPerTruckWithAc = avgPetrolConsumptionPerTruck + EXTRA_CONSUMPTION_FOR_AC_ON;
+        return isAcOn ? avgPetrolConsumptionPerTruckWithAc : avgPetrolConsumptionPerTruck;
     }
 }
